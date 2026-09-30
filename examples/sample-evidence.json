@@ -1,0 +1,9 @@
+{
+  "case_id": "CASE-001",
+  "purpose": "Demonstrate traceable evidence input without personal data",
+  "evidence": [
+    {"id": "EV-001", "type": "control_observation", "source": "synthetic-demo", "claim": "Public access is blocked", "verified": true},
+    {"id": "EV-002", "type": "review_note", "source": "synthetic-demo", "claim": "Reviewer access is read-only", "verified": true}
+  ],
+  "note": "Synthetic data only. No client or employer information."
+}
