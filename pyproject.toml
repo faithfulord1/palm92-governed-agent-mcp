@@ -1,0 +1,8 @@
+[project]
+name = "palm92-governed-agent-mcp"
+version = "0.1.0"
+description = "Human-in-the-loop governance reference prototype for agentic AI and MCP-style tools."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
