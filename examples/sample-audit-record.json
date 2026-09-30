@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1",
+  "timestamp": "2026-09-30T00:00:00+00:00",
+  "request": {
+    "request_id": "REQ-DEMO-002",
+    "requester": "demo-user",
+    "purpose": "Demonstrate approval gate",
+    "action": "send_payment",
+    "tool": "payment_api",
+    "target": "synthetic-target",
+    "evidence_ids": ["EV-001"]
+  },
+  "policy": {"decision": "REVIEW", "reason": "Consequential action requires human approval.", "rule_id": "HITL-001"},
+  "approval": {"reviewer": "human-reviewer", "approved": false},
+  "final_state": "DENY",
+  "execution": "BLOCKED"
+}
