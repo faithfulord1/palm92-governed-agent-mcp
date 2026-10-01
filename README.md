@@ -97,13 +97,16 @@ src/
 
 - [x] Define the governed-agent problem and control objectives
 - [x] Document the human-in-the-loop workflow
-- [ ] Add sample policy and evidence schemas
-- [ ] Implement policy/risk gate
-- [ ] Implement human approval state
-- [ ] Implement append-only audit event model
-- [ ] Add MCP tool demonstration
-- [ ] Add test scenarios for allowed, denied and escalated actions
-- [ ] Document limitations and threat model
+- [x] Add sample policy and evidence handling
+- [x] Implement policy/risk gate
+- [x] Implement human approval state
+- [x] Implement structured audit event model
+- [x] Add MCP tool demonstration
+- [x] Add test scenarios for allowed, denied and escalated actions
+- [x] Add a visual reviewer demo interface
+- [ ] Persist append-only audit events in a production-grade store
+- [ ] Add a fuller threat model and abuse-case test suite
+- [ ] Host a public visual demo
 - [ ] Record a short end-to-end demonstration
 
 ## Recruiter / reviewer walkthrough
@@ -143,4 +146,6 @@ See [visual demo instructions](docs/visual-demo.md).
 
 ### Current maturity
 
-**Working local reference prototype.** Governance logic, automated tests, MCP tool definitions and the visual demo are implemented in source. External consequential actions remain simulated by design. A hosted public demo is not yet claimed.
+**Working local reference prototype.** The repository contains executable governance logic, automated tests, a real MCP-compatible FastMCP server with three governed tools, and a Streamlit visual demo. External consequential actions remain simulated by design.
+
+**Truthful portfolio boundary:** this is not claimed as a continuously hosted MCP service, production compliance platform, or live integration with payment, identity, access-control or employer systems. The MCP server is a runnable local reference implementation; the visual interface is a runnable local reviewer demo.
