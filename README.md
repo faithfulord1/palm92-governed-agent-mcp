@@ -122,3 +122,25 @@ Palm92 Intelligence builds practical, human-governed AI concepts around real-wor
 
 **Project owner:** Faith Wright  
 **Portfolio:** Palm92 Intelligence
+
+
+## Working MCP demonstration
+
+The repository now includes `mcp_server.py`, an MCP-compatible server exposing governed tools for policy evaluation, governance-record creation and explicit human decisions. It intentionally does not expose unrestricted consequential execution.
+
+See [MCP demo instructions](docs/mcp-demo.md).
+
+## Visual demo interface
+
+A Streamlit reviewer interface is available in `demo/app.py`. It shows the policy decision, final state, approval gate and structured audit record for synthetic requests.
+
+```bash
+pip install -r requirements.txt
+streamlit run demo/app.py
+```
+
+See [visual demo instructions](docs/visual-demo.md).
+
+### Current maturity
+
+**Working local reference prototype.** Governance logic, automated tests, MCP tool definitions and the visual demo are implemented in source. External consequential actions remain simulated by design. A hosted public demo is not yet claimed.
