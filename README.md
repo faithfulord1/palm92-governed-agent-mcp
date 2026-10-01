@@ -149,3 +149,23 @@ See [visual demo instructions](docs/visual-demo.md).
 **Working local reference prototype.** The repository contains executable governance logic, automated tests, a real MCP-compatible FastMCP server with three governed tools, and a Streamlit visual demo. External consequential actions remain simulated by design.
 
 **Truthful portfolio boundary:** this is not claimed as a continuously hosted MCP service, production compliance platform, or live integration with payment, identity, access-control or employer systems. The MCP server is a runnable local reference implementation; the visual interface is a runnable local reviewer demo.
+
+
+## Public deployment
+
+The repository is deployment-ready as a single ASGI application in `app.py`.
+
+Public routes:
+
+- `/` — reviewer-friendly visual governance demo
+- `/api/evaluate` — synthetic governance evaluation endpoint
+- `/mcp` — Streamable HTTP MCP endpoint
+- `/health` — deployment health check
+
+See [deployment instructions](docs/deployment.md).
+
+### Deployment status
+
+**Code is deployment-ready. Public Vercel deployment is the next step.**
+
+The deployed portfolio version will continue to simulate consequential external actions by design. It must not be described as a production compliance platform or live payment/access-control integration.
