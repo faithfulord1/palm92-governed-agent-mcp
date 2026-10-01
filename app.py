@@ -13,7 +13,8 @@ from __future__ import annotations
 import html
 import json
 
-from mcp.server.mcpserver import MCPServer
+from mcp.server import MCPServer
+from mcp.server.transport_security import TransportSecuritySettings
 from starlette.requests import Request as StarletteRequest
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.routing import Route
@@ -75,6 +76,7 @@ def record_human_decision(
     return process(req, reviewer=reviewer, approved=approved)
 
 
+@mcp.custom_route("/health", methods=["GET"])
 async def health(_: StarletteRequest) -> JSONResponse:
     return JSONResponse(
         {
@@ -86,6 +88,7 @@ async def health(_: StarletteRequest) -> JSONResponse:
     )
 
 
+@mcp.custom_route("/api/evaluate", methods=["POST"])
 async def api_evaluate(request: StarletteRequest) -> JSONResponse:
     body = await request.json()
     req = Request(
@@ -103,6 +106,7 @@ async def api_evaluate(request: StarletteRequest) -> JSONResponse:
     return JSONResponse(result)
 
 
+@mcp.custom_route("/", methods=["GET"])
 async def homepage(_: StarletteRequest) -> HTMLResponse:
     page = """<!doctype html>
 <html lang="en">
@@ -216,13 +220,11 @@ function decide(approved){
     return HTMLResponse(page)
 
 
+security = TransportSecuritySettings(enable_dns_rebinding_protection=False)
+
 app = mcp.streamable_http_app(
     streamable_http_path="/mcp",
     json_response=True,
     stateless_http=True,
-    custom_starlette_routes=[
-        Route("/", homepage),
-        Route("/health", health),
-        Route("/api/evaluate", api_evaluate, methods=["POST"]),
-    ],
+    transport_security=security,
 )
