@@ -1,8 +1,16 @@
 [project]
 name = "palm92-governed-agent-mcp"
-version = "0.1.0"
-description = "Human-in-the-loop governance reference prototype for agentic AI and MCP-style tools."
-requires-python = ">=3.10"
+version = "0.2.0"
+description = "Human-in-the-loop governance reference prototype for agentic AI and MCP tools."
+requires-python = ">=3.12,<3.15"
+dependencies = [
+  "mcp>=2.2.0,<3",
+  "starlette>=0.40.0",
+  "uvicorn>=0.30.0",
+]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+[tool.vercel]
+entrypoint = "app:app"
