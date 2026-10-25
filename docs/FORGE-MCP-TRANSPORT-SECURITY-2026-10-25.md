@@ -14,7 +14,7 @@ The public ASGI entry point constructed `TransportSecuritySettings` with DNS-reb
 - Read Render and Vercel deployment host variables without trusting an incoming request.
 - Rejected catch-all hosts, URL-shaped hosts and origins containing paths at startup.
 - Added nine tests covering the ASGI wiring, configuration and request rejection/acceptance paths.
-- Added read-only CI for tests, compilation and dependency auditing.
+- Upgraded the existing workflow to read-only CI with dependency installation, tests, compilation and dependency auditing.
 
 ## Verification boundary
 
