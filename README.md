@@ -162,6 +162,8 @@ Public routes:
 - `/mcp` — Streamable HTTP MCP endpoint
 - `/health` — deployment health check
 
+The MCP transport now enables DNS-rebinding protection and uses an explicit deployment-host and browser-origin allow-list. See [deployment instructions](docs/deployment.md) for the required public-host configuration.
+
 See [deployment instructions](docs/deployment.md).
 
 ### Deployment status
