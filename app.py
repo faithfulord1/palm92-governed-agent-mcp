@@ -14,12 +14,12 @@ import html
 import json
 
 from mcp.server import MCPServer
-from mcp.server.transport_security import TransportSecuritySettings
 from starlette.requests import Request as StarletteRequest
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.routing import Route
 
 from src.governed_agent import Request, evaluate_policy, process
+from src.transport_security import build_transport_security
 
 mcp = MCPServer("Palm92 Governed Agent")
 
@@ -220,7 +220,7 @@ function decide(approved){
     return HTMLResponse(page)
 
 
-security = TransportSecuritySettings(enable_dns_rebinding_protection=False)
+security = build_transport_security()
 
 app = mcp.streamable_http_app(
     streamable_http_path="/mcp",

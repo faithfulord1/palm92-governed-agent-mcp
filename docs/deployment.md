@@ -11,6 +11,17 @@ The deployed portfolio version exposes one ASGI application:
 
 The MCP endpoint exposes governed tools only. External consequential execution remains simulated.
 
+## Required transport configuration
+
+The MCP transport validates `Host`, `Origin` and JSON content type. Localhost is available by default for development. For a public deployment, allow only the exact public hostname and browser origin:
+
+```text
+PALM92_ALLOWED_HOSTS=mcp.palm92.example
+PALM92_ALLOWED_ORIGINS=https://mcp.palm92.example
+```
+
+Render's `RENDER_EXTERNAL_HOSTNAME` and Vercel's `VERCEL_URL` are also read automatically. Custom domains still need the explicit Palm92 variables. Keep these values server-side with the deployment configuration. The application rejects `*`, URL-shaped host entries and origins containing a path.
+
 ## Recommended deployment
 
 Vercel supports Python ASGI/FastAPI-style applications. The repository now includes `app.py` as the deployment entry point.
