@@ -62,7 +62,9 @@ def evaluate_policy(request: Request) -> PolicyResult:
 
 
 def evidence_fingerprint(evidence_ids: list[str]) -> str:
-    payload = "|".join(sorted(evidence_ids)).encode()
+    # Encode list boundaries, so an ID containing a delimiter cannot impersonate
+    # a different evidence set. Sorting preserves the existing order independence.
+    payload = json.dumps(sorted(evidence_ids), ensure_ascii=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()[:16]
 
 
@@ -79,7 +81,8 @@ def process(request: Request, reviewer: str | None = None, approved: bool | None
             final = Decision.ALLOW if approved else Decision.DENY
 
     event = {
-        "schema_version": "0.1",
+        "schema_version": "0.2",
+        "evidence_fingerprint_format": "sorted-json-sha256-64bit-v1",
         "timestamp": utc_now(),
         "request": asdict(request),
         "evidence_fingerprint": evidence_fingerprint(request.evidence_ids),
