@@ -44,7 +44,7 @@ def load_local_env() -> None:
 
 
 load_local_env()
-AUTH_REQUIRED = bool(os.getenv("VERCEL") or os.getenv("REPLIT_DEPLOYMENT") or os.getenv("REPL_ID") or os.getenv("REPLIT_DEV_DOMAIN") or os.getenv("AGENT_HQ_ADMIN_PASSWORD") or os.getenv("AGENT_HQ_REQUIRE_AUTH", "").lower() in {"1", "true", "yes"})
+AUTH_REQUIRED = bool(os.getenv("VERCEL") or os.getenv("RENDER") or os.getenv("RENDER_SERVICE_ID") or os.getenv("REPLIT_DEPLOYMENT") or os.getenv("REPL_ID") or os.getenv("REPLIT_DEV_DOMAIN") or os.getenv("AGENT_HQ_ADMIN_PASSWORD") or os.getenv("AGENT_HQ_REQUIRE_AUTH", "").lower() in {"1", "true", "yes"})
 LOGIN_FAILURES: dict[str, list[float]] = {}
 AGENTS = [
     {"id": "chief", "name": "Chief of Staff", "role": "Orchestrator", "color": "#7357e8"},
