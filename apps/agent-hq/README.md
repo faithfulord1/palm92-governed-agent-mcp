@@ -69,7 +69,7 @@ Use a Meta test number first. Do not move a personal number to the Cloud API wit
 
 ## Hosted deployment gate
 
-The app refuses public binding without `AGENT_HQ_ADMIN_PASSWORD` (at least 14 characters) and `AGENT_HQ_SESSION_SECRET` (at least 32 random characters). Generate a secret locally with:
+The app requires sign-in on Vercel, Render, and Replit, and refuses public binding without `AGENT_HQ_ADMIN_PASSWORD` (at least 14 characters) and `AGENT_HQ_SESSION_SECRET` (at least 32 random characters). Generate a secret locally with:
 
 ~~~bash
 python -c 'import secrets; print(secrets.token_urlsafe(48))'
