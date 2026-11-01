@@ -1,34 +1,28 @@
 # Palm92 Agent HQ
 
-A local-first, human-governed agent orchestration starter based on Faith Wright's shared AI-building workflow.
+A local-first, human-governed workspace for routing requests to specialists, keeping shared project context, and reviewing AI drafts.
 
 **AI investigates. Humans decide.**
 
-## Included
+## What works
 
-- A mobile-friendly Agent HQ dashboard
-- A natural-language request inbox with transparent specialist routing
-- Seven Palm92/Faithfulord specialist roles
-- Shared knowledge, memory, and rule notes
-- Notifications and auditable task/approval status
-- A WhatsApp Business Cloud API webhook adapter
-- Outbound WhatsApp drafts that require separate approval and send actions
-- Reusable workflow skill in SKILL.md
+- Mobile-friendly dashboard with a request queue, notes, notifications, approvals, WhatsApp inbox, and specialist directory.
+- Explainable keyword routing to seven specialist roles.
+- Optional two-step AI workflow: the selected specialist prepares a draft, then the Chief of Staff reviewer checks it. The user sees both outputs and must review them.
+- Verified WhatsApp Cloud API webhook; incoming text is deduplicated, stored, and queued for a specialist.
+- Outbound WhatsApp text replies require a human approval, an allowlisted opted-in recipient, and a recent incoming message. Approval and sending are separate actions.
+- Hosted sign-in gate with signed, expiring session cookies. Vercel and Replit deployments require authentication secrets before serving the dashboard.
+- Reusable workflow skill in `SKILL.md`.
 
-## Current scope
+## Important limits
 
-This is a working local app starter. The local dispatcher uses explainable keyword rules. No LLM or coding-agent runtime is connected yet. Requests are queued for manual execution. The app does not start shell commands, create Git branches, message people automatically, or alter accounts.
+This is a usable local application and an integration-ready build, not a live WhatsApp service yet. No WhatsApp account, business number, API token, OpenAI API key, or public Agent HQ deployment is connected. The agent runtime is off until configured. AI API usage can be billed to the configured API account.
 
-The WhatsApp adapter is off until configuration is present. It receives verified webhook events and stores incoming text for human review. Outbound replies require all of the following:
+The data store is SQLite on the local filesystem and is not encrypted by this app. Keep it on a private device. Do not host personal or customer data publicly until a durable, protected database, retention/deletion policy, access review, and HTTPS deployment are configured. The existing Palm92 Vercel project serves the repository root app, not this sub-app.
 
-1. An approved draft
-2. A recipient on WHATSAPP_ALLOWED_RECIPIENTS
-3. A recent incoming message from that recipient, within the 24-hour reply window
-4. Meta Cloud API configuration
+The agents cannot run shell commands, publish content, spend money, change accounts, or send a message without a separate human approval action.
 
-The adapter supports text replies only. It does not implement business-initiated message templates.
-
-## Run locally
+## Run privately on your computer
 
 Python 3.11 or newer is recommended.
 
@@ -40,39 +34,47 @@ cp .env.example .env
 python app.py
 ~~~
 
-Open http://127.0.0.1:3870. The server binds to loopback by default.
+Open http://127.0.0.1:3870. The default bind is loopback, so the app is only reachable from the same computer. SQLite is created under `data/agent-hq.sqlite3`.
 
-The database is created at data/agent-hq.sqlite3. Keep it on a private device and back it up securely. Do not store access tokens in the database, notes, or chat.
+## Enable the AI specialist and reviewer
 
-## WhatsApp setup
+1. Create or use an OpenAI API account and set `OPENAI_API_KEY` and `OPENAI_MODEL` in the private server environment. ChatGPT subscriptions and API billing are separate.
+2. Restart the app and confirm the dashboard shows **TEAM RUNTIME · READY**.
+3. Use **Run agent team** on a queued request. The app asks for confirmation before sending that request and the latest shared notes to the OpenAI API. That request makes two model calls and may incur usage charges.
+4. Review the specialist draft and Chief of Staff review. The app does not perform any external action from those drafts.
 
-Live use requires a Meta business portfolio, a WhatsApp Business Account, a registered business phone number, an access token, and a public HTTPS webhook. Configure secrets in a private environment file or secret manager, never in source control.
+Never place an API key in a browser form, shared note, GitHub commit, or chat.
 
-Set these values in .env:
+## Connect WhatsApp
 
-- WHATSAPP_ACCESS_TOKEN
-- WHATSAPP_PHONE_NUMBER_ID
-- WHATSAPP_API_VERSION
-- WHATSAPP_VERIFY_TOKEN
-- WHATSAPP_APP_SECRET
-- WHATSAPP_ALLOWED_RECIPIENTS
+Live use requires a Meta business portfolio, WhatsApp Business Account, a registered business phone number, access token, phone-number ID, app secret, verify token, and a public HTTPS callback. Meta's hosted Cloud API documentation lists the required business assets and token setup: https://www.postman.com/meta/whatsapp-business-platform/documentation/wlk6lh4/whatsapp-cloud-api
 
-Use an allowlist containing only recipients who have explicitly consented to receive replies. Configure the webhook callback as https://YOUR-HOST/webhook and subscribe the app to the WhatsApp messages webhook field. Verify webhook signatures before processing events. This starter stores only incoming text message bodies and sender numbers; review retention and privacy needs before production use.
+Set these values in the private server environment, never in source control:
 
-Official Meta reference: https://developers.facebook.com/docs/whatsapp/cloud-api/overview
+- `WHATSAPP_ACCESS_TOKEN`
+- `WHATSAPP_PHONE_NUMBER_ID`
+- `WHATSAPP_API_VERSION`
+- `WHATSAPP_VERIFY_TOKEN`
+- `WHATSAPP_APP_SECRET`
+- `WHATSAPP_ALLOWED_RECIPIENTS`
 
-## Safety and deployment
+Then configure `https://YOUR-HOST/webhook` in Meta, verify with the same webhook token, and subscribe to the `messages` webhook field. The app validates `X-Hub-Signature-256` and deduplicates message IDs. Inbound text becomes a queued task. Outgoing messages remain disabled unless the recipient has opted in, is allowlisted, has messaged within the 24-hour reply window, and the draft is approved.
 
-- Never expose the local app to the public internet without authentication and a production security review.
-- Do not put medical, financial, immigration, or other sensitive records in the shared brain.
-- Never add access tokens to a rule or memory note.
-- Human approval is required before any WhatsApp send.
-- Browser-visible approval is only a control in the local starter, not a production identity or authorization system.
-- Use isolated Git branches or worktrees for concurrent coding agents. This app does not launch or stop OS processes.
-- Add durable storage, authentication, encrypted secrets, retention controls, and webhook monitoring before public deployment.
+Use a Meta test number first. Do not move a personal number to the Cloud API without checking Meta's current number migration and app coexistence rules.
 
-## Structure
+## Hosted deployment gate
 
-- app.py — Starlette application and local SQLite store
-- SKILL.md — reusable agent-swarm build and review workflow
-- .env.example — configuration names with empty secret values
+The app refuses public binding without `AGENT_HQ_ADMIN_PASSWORD` (at least 14 characters) and `AGENT_HQ_SESSION_SECRET` (at least 32 random characters). Generate a secret locally with:
+
+~~~bash
+python -c 'import secrets; print(secrets.token_urlsafe(48))'
+~~~
+
+The current app uses local SQLite, so a Vercel preview status does not mean this sub-app is deployed or has durable storage. Before exposing it to the internet, move to a private host with a persistent, protected database, add retention/deletion controls, configure HTTPS and secrets, then verify authenticated access and WhatsApp webhook delivery. Do not put the Meta webhook behind login; it is separately protected by Meta signature verification.
+
+## Skill and project files
+
+- `app.py`: Starlette application, auth/session checks, SQLite store, optional OpenAI Responses API workflow, WhatsApp Cloud API adapter.
+- `SKILL.md`: repeatable Palm92 Agent HQ build and guided immersion workflow.
+- `.env.example`: configuration names only; all secrets are blank.
+- `requirements.txt`: Python dependencies.
