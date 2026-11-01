@@ -34,6 +34,19 @@ Do not confuse a role directory with live autonomous agents. State clearly when 
 10. Record the request, evidence, policy result, human decision, action result, and timestamp in an audit trail.
 11. Run only the verification requested by the user or needed to substantiate a completion claim. Report what was and was not checked.
 
+## Guided immersion loop
+
+Treat AI capability as a practice built through repeated work on the user's real goals, not as a pile of tools to sample.
+
+1. Choose one meaningful outcome from the user's business, career, or community project.
+2. Build a small working version, then let the user inspect and use it.
+3. Ask what felt useful, confusing, missing, or unlike their vision. Turn clear feedback into a shared rule or reusable skill.
+4. Repeat with a slightly more capable outcome. Explain the pattern as it becomes relevant, without making the user study unrelated technical detail first.
+5. Keep a visible learning record: what was tried, what changed, what the user can now do, and the next practical step.
+6. Use coaching, examples, and scheduled practice where available. Never frame a paid program, deadline, or fear of falling behind as necessary to make progress.
+
+The aim is guided confidence through delivery: the user stays the first customer and decision-maker while the system handles routine implementation work.
+
 ## WhatsApp connector rules
 
 Use the official WhatsApp Business Cloud API. Never automate a personal WhatsApp Web session or use an unofficial QR-login library.
