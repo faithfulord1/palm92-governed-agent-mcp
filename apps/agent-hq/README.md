@@ -9,6 +9,7 @@ A local-first, human-governed workspace for routing requests to specialists, kee
 - Mobile-friendly dashboard with a request queue, notes, notifications, approvals, WhatsApp inbox, and specialist directory.
 - Explainable keyword routing to seven specialist roles.
 - Optional two-step AI workflow: the selected specialist prepares a draft, then the Chief of Staff reviewer checks it. The user sees both outputs and must review them.
+- Lesson-to-outcome companion: turn a user-supplied lesson or idea into a project-specific implementation brief or reusable skill draft, with a second-agent review.
 - Verified WhatsApp Cloud API webhook; incoming text is deduplicated, stored, and queued for a specialist.
 - Outbound WhatsApp text replies require a human approval, an allowlisted opted-in recipient, and a recent incoming message. Approval and sending are separate actions.
 - Hosted sign-in gate with signed, expiring session cookies. Vercel and Replit deployments require authentication secrets before serving the dashboard.
@@ -44,6 +45,10 @@ Open http://127.0.0.1:3870. The default bind is loopback, so the app is only rea
 4. Review the specialist draft and Chief of Staff review. The app does not perform any external action from those drafts.
 
 Never place an API key in a browser form, shared note, GitHub commit, or chat.
+
+## Turn learning into a project result
+
+Open **Lesson to outcome**, choose a lesson title and one of your projects, then paste notes or an excerpt you have the right to use. Start **Create reviewed draft** only when you are ready to send that text to the configured OpenAI API. The specialist creates a brief or skill draft; the Chief of Staff checks it. Agent HQ saves the generated result and review, not the submitted source transcript. Personal memory notes are not sent as model context. Review assumptions and verify facts before you use the draft or install a skill.
 
 ## Connect WhatsApp
 
