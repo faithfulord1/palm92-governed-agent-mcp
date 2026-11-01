@@ -18,7 +18,7 @@ Turn a founder's voice note, message, screenshot, or rough idea into a working, 
 - **The orchestrator** clarifies the desired outcome, selects a specialist, tracks status, and returns a preview.
 - **Connectors** move requests and approved outputs between the app and external services.
 
-Do not confuse a role directory with live autonomous agents. State clearly when an LLM provider or coding runtime is not connected.
+Do not confuse a role directory with live autonomous agents. When no model provider is configured, say the team is offline and requests are only queued. When enabled, name the exact work the model performed and keep its output as a draft for review.
 
 ## Workflow
 
@@ -33,6 +33,10 @@ Do not confuse a role directory with live autonomous agents. State clearly when 
 9. Require a human decision before sending external messages, publishing, spending money, changing access, or deleting data.
 10. Record the request, evidence, policy result, human decision, action result, and timestamp in an audit trail.
 11. Run only the verification requested by the user or needed to substantiate a completion claim. Report what was and was not checked.
+
+## Optional model-backed team run
+
+When `OPENAI_API_KEY` and `OPENAI_MODEL` are configured, let the user explicitly start a request run. Send only that request and a small, recent set of shared notes to the provider. Disclose that API use can be billed and confirm before sending content. Run the selected specialist first, then a separate Chief of Staff review. Save both outputs, mark the request `needs_review`, and notify the user. The reviewer can flag uncertainty and risk; it cannot authorize actions. Never call external tools, send messages, or mark an outcome complete based only on model text.
 
 ## Guided immersion loop
 
