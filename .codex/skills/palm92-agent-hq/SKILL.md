@@ -23,16 +23,19 @@ Do not confuse a role directory with live autonomous agents. When no model provi
 ## Workflow
 
 1. Capture the request in the user's own words. Extract the goal, intended audience, constraints, examples, and desired output.
-2. Search the existing project and reusable notes before creating a new system.
-3. Convert the request into a small task with a visible owner, status, and completion condition.
-4. Route by explicit rules or a configured model. Show why a specialist was selected and allow the user to change it.
-5. Build a clickable first version that the founder can inspect. Keep the feedback loop short: capture reaction, adjust, show again.
-6. Store reusable decisions as typed notes: knowledge, memory, or shared rule. Do not put credentials or unnecessary sensitive data in shared memory.
-7. Add notifications for assignments, blockers, approvals, connector events, and completed work.
-8. Separate parallel work in branches or worktrees. Never share mutable project folders between simultaneous coding agents.
-9. Require a human decision before sending external messages, publishing, spending money, changing access, or deleting data.
-10. Record the request, evidence, policy result, human decision, action result, and timestamp in an audit trail.
-11. Run only the verification requested by the user or needed to substantiate a completion claim. Report what was and was not checked.
+2. Define the user-facing result first: for example, a company brief, brand kit, funnel, ad set, newsletter engine, lead qualifier, internal tool, bookkeeping workflow, or leadership dashboard. Pick tools to produce that result, not as ends in themselves.
+3. Search the existing project and reusable notes before creating a new system. Separate confirmed facts from source claims, recommendations, assumptions, and unknowns.
+4. Sequence tasks by dependency. Deliver a useful first result that creates the knowledge or capability needed for the next one; do not promise a productivity gain without measuring it.
+5. When given a course lesson or transcript, produce a short source-grounded brief: principle, application to a named project, ordered actions, owner, concrete deliverable, acceptance checks, assumptions, and next action. Do not reproduce long source passages.
+6. Convert the request into a small task with a visible owner, status, and completion condition. Route by explicit rules or a configured model. Show why a specialist was selected and allow the user to change it.
+7. Build a clickable first version that the founder can inspect. Keep the feedback loop short: capture reaction, adjust, show again.
+8. Store reusable decisions as typed notes: knowledge, memory, or shared rule. Do not put credentials or unnecessary sensitive data in shared memory. Keep personal memory notes local; do not include them in automatic model context.
+9. Store generated briefs and skill drafts separately from raw learning material. Do not retain full transcripts by default. Require the user to review a generated skill before installation.
+10. Add notifications for assignments, blockers, approvals, connector events, and completed work.
+11. Separate parallel work in branches or worktrees. Never share mutable project folders between simultaneous coding agents.
+12. Require a human decision before sending external messages, publishing, spending money, changing access, merging, deploying publicly, or deleting data.
+13. Record the request, evidence, policy result, human decision, action result, and timestamp in an audit trail.
+14. Run only the verification requested by the user or needed to substantiate a completion claim. Report what was and was not checked.
 
 ## Optional model-backed team run
 
@@ -50,6 +53,10 @@ Treat AI capability as a practice built through repeated work on the user's real
 6. Use coaching, examples, and scheduled practice where available. Never frame a paid program, deadline, or fear of falling behind as necessary to make progress.
 
 The aim is guided confidence through delivery: the user stays the first customer and decision-maker while the system handles routine implementation work.
+
+## Lesson-to-outcome companion
+
+When the app is configured with a model provider, let the user explicitly turn lesson notes into one of two outputs: an implementation brief for a selected project, or a reusable skill draft. Send only the submitted lesson material, the chosen project, and a small set of shared knowledge/rule notes. Keep personal memory local. Use a specialist to create the output and an independent Chief of Staff to review it. Save the generated draft and review, not the full source transcript. Disclose API billing before sending. Do not install the skill or execute the recommended plan automatically.
 
 ## WhatsApp connector rules
 
